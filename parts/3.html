@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DIY Lisp :: Part 3</title>
+    <link rel="stylesheet" href="/css/style.css?v=1.0">
+    <meta name="description" content="A hands-on, test-driven guide to implementing a simple programming language">
+</head>
+
+<body>
+    <article class="markdown-body"><h2>
+    <a id="user-content-part-3-evaluating-complex-expressions" class="anchor" href="#part-3-evaluating-complex-expressions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Part 3: evaluating complex expressions</h2>
+
+    <p>You have now already made a simple language, able to evaluate nested arithmetic expressions. It is time to add the ability to use control structures. </p>
+
+    <p>For our language, an <code>if</code> statement will suffice. The <code>if</code> takes three arguments. The first one is the predicate <code>p</code>, which is always evaluated. The second <strong>or</strong> third argument is then evaluated and returned depending on the value of <code>p</code>.</p>
+
+    <h3>
+    <a id="user-content-make-it-happen" class="anchor" href="#make-it-happen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Make it happen!</h3>
+
+    <p>Go on, you know what to do.</p>
+
+    <div class="highlight highlight-bash"><pre>nosetests tests/test_3_evaluating_complex_expressions.py --stop</pre></div>
+
+    <h3>
+    <a id="user-content-play-while-you-work" class="anchor" href="#play-while-you-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>Play while you work</h3>
+
+    <p>Remember that the REPL is a great way to play around with your language while you work on it.</p>
+
+    <div class="highlight highlight-bash"><pre>./repl
+    →  (<span class="pl-k">if</span> (<span class="pl-k">&gt;</span> 42 100)
+    …      <span class="pl-s1"><span class="pl-pds">'</span>foo</span>
+    <span class="pl-s1">…      <span class="pl-pds">'</span></span>bar)
+    bar</pre></div>
+
+    <h3>
+    <a id="user-content-whats-next" class="anchor" href="#whats-next" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's next?</h3>
+
+    <p>Go to <a href="/parts/4.html">part 4</a> where we add environments that'll enable us to work with variables.</p>
+    </article>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DIY Lisp :: Part 4</title>
+    <link rel="stylesheet" href="/css/style.css?v=1.0">
+    <meta name="description" content="A hands-on, test-driven guide to implementing a simple programming language">
+</head>
+
+<body>
+    <article class="markdown-body"><h2>
+    <a id="user-content-part-4-working-with-variables" class="anchor" href="#part-4-working-with-variables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Part 4: working with variables</h2>
+
+    <p>So far, our interpreted language is only able do deal with expressions one by one. In a real programming language, we need to be able to store intermediate results in variables, and then later to look them up from the environment.</p>
+
+    <p>We will start by implementing the <code>Environment</code> class (which can be found in <code>diylisp/types.py</code>). Then we'll extend <code>evaluate</code> to handle expressions using defined variables, and the creation of new variables with the <code>define</code> form.</p>
+
+    <p>Run the tests, and get going!</p>
+
+    <div class="highlight highlight-bash"><pre>nosetests tests/test_4_working_with_variables_and_environments.py --stop</pre></div>
+
+    <h3>
+    <a id="user-content-whats-next" class="anchor" href="#whats-next" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's next?</h3>
+
+    <p>In <a href="/parts/5.html">part 5</a> the environments we just implemented enable us to make lexically scoped functions.</p>
+    </article>
+</body>
+</html>

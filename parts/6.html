@@ -1,0 +1,40 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DIY Lisp :: Part 6</title>
+    <link rel="stylesheet" href="/css/style.css?v=1.0">
+    <meta name="description" content="A hands-on, test-driven guide to implementing a simple programming language">
+</head>
+
+<body>
+    <article class="markdown-body"><h2>
+    <a id="user-content-part-6-working-with-lists" class="anchor" href="#part-6-working-with-lists" aria-hidden="true"><span class="octicon octicon-link"></span></a>Part 6: working with lists</h2>
+
+    <p>This is the last section before we're done implementing the language, and compared to the last part it should be relatively easy.</p>
+
+    <p>In Lisp one of the fundamental data structures is <em>the list</em> (the name Lisp is derived from <em>list processing</em> after all). In order to be able to work properly with lists, we'll introduce four new forms into the language:</p>
+
+    <ul>
+    <li>
+    <code>cons</code> is used to construct lists from a "head" element, and the rest of the list (the "tail").</li>
+    <li>
+    <code>head</code> extracts the first element of a list</li>
+    <li>
+    <code>tail</code> returns the rest of the elments, once the first is dropped.</li>
+    <li>
+    <code>empty</code> takes a list as input, and returns <code>#t</code> if it is empty and <code>#f</code> otherwise.</li>
+    </ul>
+
+    <p>Go on then, finish your language.</p>
+
+    <div class="highlight highlight-bash"><pre>nosetests tests/test_6_working_with_lists.py --stop</pre></div>
+
+    <h3>
+    <a id="user-content-whats-next" class="anchor" href="#whats-next" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's next?</h3>
+
+    <p>With the language implementation done, it's time to use our language in <a href="/parts/7.html">part 7</a>.</p>
+    </article>
+</body>
+</html>

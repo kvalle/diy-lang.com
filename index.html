@@ -1,0 +1,106 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  	<meta charset="utf-8">
+  	<title>DIY Lisp</title>
+  	<link rel="stylesheet" href="css/style.css?v=1.0">
+	<meta name="description" content="A hands-on, test-driven guide to implementing a simple programming language">
+</head>
+
+<body>
+	<article class="markdown-body">
+	<h2><a id="user-content-diy-lisp" class="anchor" href="#diy-lisp" aria-hidden="true"><span class="octicon octicon-link"></span></a>DIY Lisp</h2>
+
+	<blockquote>
+	<p>batteries included, some assembly required</p>
+	</blockquote>
+
+    <p>DIY Lisp is a hands-on tutorial guiding you through the steps of making a relatively simple, although neat, programming language more or less from scratch. We will do this in a test-driven approach, and all you have to do is to get the tests green one after another.</p>
+
+    <p>Making a language is fun, and will hopefully teach some basic understanding of how programming languages work on a fundamental level.</p>
+
+	<h3>
+	<a id="user-content-what-we-will-be-making" class="anchor" href="#what-we-will-be-making" aria-hidden="true"><span class="octicon octicon-link"></span></a>What we will be making</h3>
+
+	<p>We will make a relatively simple, but neat language. We aim for the following features:</p>
+
+	<ul>
+	<li>A handful of datatypes (integers, booleans and symbols)</li>
+	<li>Variables</li>
+	<li>First class functions with lexical scoping</li>
+	<li>That nice homemade quality feeling</li>
+	</ul>
+
+	<p>We will <em>not</em> have:</p>
+
+	<ul>
+	<li>A proper type system</li>
+	<li>Error handling</li>
+	<li>Good performance</li>
+	<li>And much, much more</li>
+	</ul>
+
+	<p>The language should be able to interpret the following code by the time we are done:</p>
+
+	<div class="highlight highlight-lisp"><pre>(define fact 
+	    <span class="pl-c">;; Factorial function</span>
+	    (<span class="pl-s3">lambda</span> (n) 
+	        (<span class="pl-k">if</span> (<span class="pl-k">eq</span> n <span class="pl-c1">0</span>) 
+	            <span class="pl-c1">1</span> <span class="pl-c">; Factorial of 0 is 1</span>
+	            (* n (fact (- n <span class="pl-c1">1</span>))))))
+
+	<span class="pl-c">;; When parsing the file, the last statement is returned</span>
+	(fact <span class="pl-c1">5</span>)</pre></div>
+
+	<p>The syntax is that of the languages in the Lisp family. If you find the example unfamiliar, you might want to have a look at <a href="/language.html">a more detailed description of the language</a>.</p>
+
+	<h3>
+	<a id="user-content-a-few-tips" class="anchor" href="#a-few-tips" aria-hidden="true"><span class="octicon octicon-link"></span></a>A few tips</h3>
+
+	<p>Take the time to consider the following points before we get going:</p>
+
+	<ul>
+	<li>
+	<p><strong>Keep things simple</strong></p>
+
+	<p>Don't make things more complicated than they need to be. The tests should hopefully guide you every step of the way.</p>
+	</li>
+	<li>
+	<p><strong>Read the test descriptions</strong></p>
+
+	<p>Each test has a small text describing what you are going to implement and why. Reading these should make things easier, and you might end up learning more.</p>
+	</li>
+	<li>
+	<p><strong>Use the provided functions</strong></p>
+
+	<p>Some of the more boring details are already taken care of. Take the time to look at the functions provided in <code>parser.py</code>, and the various imports in files where you need to do some work.</p>
+	</li>
+	
+	<li>
+	<p><strong>Description of your language</strong></p>
+
+	<p>Unfamiliar with Lisp? Read the <a href="/language.html">description of the language</a> you are going to make.</p>
+	</li>
+	</ul>
+
+	<h3>
+	<a id="user-content-get-started" class="anchor" href="#get-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get started!</h3>
+
+	<p>The workshop is split up into seven parts. Each consist of an introduction, and a bunch of unit tests which it is your task to make run. When all the tests run, you'll have implemented that part of the language.</p>
+
+	<p>Have fun!</p>
+
+	<ul>
+	<li><a href="parts/1.html">Part 1: parsing</a></li>
+	<li><a href="parts/2.html">Part 2: evaluating simple expressions</a></li>
+	<li><a href="parts/3.html">Part 3: evaluating complex expressions</a></li>
+	<li><a href="parts/4.html">Part 4: working with variables</a></li>
+	<li><a href="parts/5.html">Part 5: functions</a></li>
+	<li><a href="parts/6.html">Part 6: working with lists</a></li>
+	<li><a href="parts/7.html">Part 7: using your language</a></li>
+	</ul>
+	</article>
+
+</body>
+</html>

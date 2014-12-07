@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DIY Lisp :: Part 2</title>
+    <link rel="stylesheet" href="/css/style.css?v=1.0">
+  <meta name="description" content="A hands-on, test-driven guide to implementing a simple programming language">
+</head>
+
+<body>
+    <article class="markdown-body"><h2>
+    <a id="user-content-part-2-evaluating-simple-expressions" class="anchor" href="#part-2-evaluating-simple-expressions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Part 2: evaluating simple expressions</h2>
+
+    <p>Now that we have the parser up and running, it's time to start working on the evaluator. We'll start with some simple expressions, such as evaluating numbers or booleans, and a few of the most basic <em>special forms</em> in the language.</p>
+
+    <ul>
+    <li>
+    <code>quote</code> takes one argument which is returned directly (without being evaluated).</li>
+    <li>
+    <code>atom</code> also takes a single argument, and returns true or false depending on whether the argument is an atom.</li>
+    <li>
+    <code>eq</code> returns true if both its arguments are the same atom, and false otherwise.</li>
+    <li>The arithmetic operators (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>mod</code> and <code>&gt;</code>) all take two arguments, and do exactly what you would expect.</li>
+    </ul>
+
+    <p>This time, your work is in the file <code>evaluator.py</code>.</p>
+
+    <h3>
+    <a id="user-content-make-it-happen" class="anchor" href="#make-it-happen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Make it happen!</h3>
+
+    <p>The following command runs the tests, stopping at the first one failed. You know the drill.</p>
+
+    <div class="highlight highlight-bash"><pre>nosetests tests/test_2_evaluating_simple_expressions.py --stop</pre></div>
+
+    <h3>
+    <a id="user-content-play-while-you-work" class="anchor" href="#play-while-you-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>Play while you work</h3>
+
+    <p>Now that we are beginning to get an interpreter going, we can start testing the results in the read-eval-print-loop (REPL).</p>
+
+    <p>Start the REPL from the command line, and try the language as we move along.</p>
+
+    <div class="highlight highlight-bash"><pre>./repl</pre></div>
+
+    <p>Remember, you'll need to restart the REPL for it to pick up any changes you make to the language.</p>
+
+    <h3>
+    <a id="user-content-whats-next" class="anchor" href="#whats-next" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's next?</h3>
+
+    <p>Head on to <a href="/parts/3.html">part 3</a> where the expressions we take become slightly more complex.</p>
+    </article>
+</body>
+</html>

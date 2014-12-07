@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DIY Lisp :: Part 5</title>
+    <link rel="stylesheet" href="/css/style.css?v=1.0">
+    <meta name="description" content="A hands-on, test-driven guide to implementing a simple programming language">
+</head>
+
+<body>
+    <article class="markdown-body"><h2>
+    <a id="user-content-part-5-functions" class="anchor" href="#part-5-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Part 5: functions</h2>
+
+    <p>This part is the one you might have been waiting for. It's time to add functions to our little language.</p>
+
+    <p>Functions are created with the <code>lambda</code> form, which returns an instance of <code>Closure</code> (find the class definition in <code>diylisp/types.py</code>). The first few tests guide you to implement the <code>lambda</code> form correctly. </p>
+
+    <p>The next tests concern calling functions. A function call happens when we evaluate a list in which the first element is a function closure.</p>
+
+    <p>Finally, we handle some situations where function calls are done incorrectly, and make sure we give appropriate errors.</p>
+
+    <h3>
+    <a id="user-content-make-it-happen" class="anchor" href="#make-it-happen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Make it happen!</h3>
+
+    <p>This is probably the most difficult part of making the language, so don't worry if it takes a bit longer than the previous parts.</p>
+
+    <div class="highlight highlight-bash"><pre>nosetests tests/test_5_adding_functions_to_the_mix.py --stop</pre></div>
+
+    <h3>
+    <a id="user-content-whats-next" class="anchor" href="#whats-next" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's next?</h3>
+
+    <p>Ready for the last part of the language? In <a href="/parts/6.html">part 6</a> we add a ways to work with lists.</p>
+    </article>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  	<meta charset="utf-8">
+  	<title>DIY Lisp :: The Language</title>
+  	<link rel="stylesheet" href="css/style.css?v=1.0">
+	<meta name="description" content="A hands-on, test-driven guide to implementing a simple programming language">
+</head>
+
+<body>
+	<article class="markdown-body"><h2>
+	<a id="user-content-the-language" class="anchor" href="#the-language" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Language</h2>
+
+	<p>The syntax of our little language is Lisp-inspired. This is mainly to make it easy to write the parser.</p>
+
+	<p>We will handle two types of expressions: <strong>atoms</strong> and <strong>lists</strong>. </p>
+
+	<ul>
+	<li>Atoms can be numbers (<code>42</code>), booleans(<code>#t</code> and <code>#f</code>) or symbols (<code>foobar</code>).</li>
+	<li>Lists consists of a series of zero or more expressions (other atoms or lists) separated by spaces and enclosed by parentheses.</li>
+	</ul>
+
+	<h3>
+	<a id="user-content-evaluation-rules" class="anchor" href="#evaluation-rules" aria-hidden="true"><span class="octicon octicon-link"></span></a>Evaluation rules</h3>
+
+	<ul>
+	<li>Numbers and booleans evaluate to themselves.</li>
+	<li>Symbols are treated as variable references. When evaluated, their values are looked up in the environment.</li>
+	<li>Lists are treated as function calls (or calls to the special forms built into the language).</li>
+	<li>Anything in between semicolons (<code>;</code>) and the end of a line is considered a comment and ignored.</li>
+	</ul>
+
+	<h3>
+	<a id="user-content-special-forms" class="anchor" href="#special-forms" aria-hidden="true"><span class="octicon octicon-link"></span></a>Special Forms</h3>
+
+	<p>The language will have a set of "special forms". These are the construct built into the language. If a list expression is evaluated, and the first element is one of a number of defined symbols, the special form is executed: </p>
+
+	<p>Here is a brief explanation of each form:</p>
+
+	<ul>
+	<li>
+	<code>quote</code> takes one argument which is returned without it being evaluated.</li>
+	<li>
+	<code>atom</code> is a predicate indicating whether or not it's one argument is an atom.</li>
+	<li>
+	<code>eq</code> returns true (<code>#t</code>) if both its arguments are the same atom.</li>
+	<li>
+	<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>mod</code> and <code>&gt;</code> all take two arguments, and does exactly what you would expect. (Note that since we have no floating point numbers, the <code>/</code> represent integer division.)</li>
+	<li>
+	<code>if</code> is the conditional, taking three arguments. It's return value is the result of evaluating the second or third argument, depending on the value of the first one.</li>
+	<li>
+	<code>define</code> is used to define new variables in the environment.</li>
+	<li>
+	<code>lambda</code> creates function closures.</li>
+	<li>
+	<code>cons</code> is used to construct lists from a head (element) and the tail (list).</li>
+	<li>
+	<code>head</code> returns the first element of a list.</li>
+	<li>
+	<code>tail</code> returns all but the first element of a list.</li>
+	</ul>
+
+	<h3>
+	<a id="user-content-function-calls" class="anchor" href="#function-calls" aria-hidden="true"><span class="octicon octicon-link"></span></a>Function calls</h3>
+
+	<p>If a list is evaluated, and the first element is something other than one of the special forms, it is expected to be a function closure. Function closures are created using the <code>lambda</code> form. </p>
+
+	<p>Here is a (rather silly) example showing how to define and use a function.</p>
+
+	<div class="highlight highlight-lisp"><pre>(define my-function
+	    <span class="pl-c">;; This function returns 42, unless the argument </span>
+	    <span class="pl-c">;; actually is 42. In that case, we return 1000.</span>
+	    (<span class="pl-s3">lambda</span> (n) 
+	        (<span class="pl-k">if</span> (<span class="pl-k">eq</span> n <span class="pl-c1">42</span>) 
+	            <span class="pl-c1">1000</span>
+	            <span class="pl-c1">42</span>)))
+
+	(my-function <span class="pl-c1">42</span>) <span class="pl-c">;; =&gt; 1000</span></pre></div>
+
+	<p>This might for some be the most "magic" part, and one that you hopefully will understand a lot better after implementing the language.</p>
+	</article>
+</body>
+</html>
