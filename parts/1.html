@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>DIY Lisp :: Part 1</title>
     <link rel="stylesheet" href="/css/style.css?v=1.0">
-  <meta name="description" content="A hands-on, test-driven guide to implementing a simple programming language">
+    <meta name="description" content="A hands-on, test-driven guide to implementing a simple programming language">
 </head>
 
 <body>
@@ -24,81 +24,95 @@
                 +-----------+        +-------------+
     </code></pre>
 
+    <p>Simple, huh?</p>
+
     <p>The format produced by the parser is called the <em>abstract syntax tree</em> (AST) of the program.</p>
 
     <h3>
-    <a id="user-content-our-ast" class="anchor" href="#our-ast" aria-hidden="true"><span class="octicon octicon-link"></span></a>Our AST</h3>
+    <a id="user-content-the-ast" class="anchor" href="#the-ast" aria-hidden="true"><span class="octicon octicon-link"></span></a>The AST</h3>
 
-    <p>So what does our AST look like? Lets have a sneak peek.</p>
+    <p>The AST is a data structure representing the program to be run. So how should we implement our AST in the parser? </p>
 
-    <div class="highlight highlight-python"><pre><span class="pl-k">&gt;&gt;&gt;</span> <span class="pl-k">from</span> diylisp.parser <span class="pl-k">import</span> parse
-    <span class="pl-k">&gt;&gt;&gt;</span> program <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"""</span></span>
-    <span class="pl-s1">...   (define fact </span>
-    <span class="pl-s1">...       ;; Factorial function</span>
-    <span class="pl-s1">...       (lambda (n) </span>
-    <span class="pl-s1">...           (if (eq n 0) </span>
-    <span class="pl-s1">...               1 ; Factorial of 0 is 1, and we deny </span>
-    <span class="pl-s1">...                 ; the existence of negative numbers</span>
-    <span class="pl-s1">...               (* n (fact (- n 1))))))</span>
-    <span class="pl-s1">... <span class="pl-pds">"""</span></span>
-    <span class="pl-k">&gt;&gt;&gt;</span> parse(program)
-    [<span class="pl-s1"><span class="pl-pds">'</span>define<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>fact<span class="pl-pds">'</span></span>, [<span class="pl-s1"><span class="pl-pds">'</span>lambda<span class="pl-pds">'</span></span>, [<span class="pl-s1"><span class="pl-pds">'</span>n<span class="pl-pds">'</span></span>], [<span class="pl-s1"><span class="pl-pds">'</span>if<span class="pl-pds">'</span></span>, [<span class="pl-s1"><span class="pl-pds">'</span>eq<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>n<span class="pl-pds">'</span></span>, <span class="pl-c1">0</span>], <span class="pl-c1">1</span>, [<span class="pl-s1"><span class="pl-pds">'</span>*<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>n<span class="pl-pds">'</span></span>, [<span class="pl-s1"><span class="pl-pds">'</span>fact<span class="pl-pds">'</span></span>, [<span class="pl-s1"><span class="pl-pds">'</span>-<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>n<span class="pl-pds">'</span></span>, <span class="pl-c1">1</span>]]]]]]</pre></div>
+    <div class="python-specific">
 
-    <p>The AST, then, is created as follows:</p>
+        <p>In our Python implementation we will simply use lists to represent s-expressions, and primitives to represent the various atoms.</p>
 
-    <ul>
-    <li>Comments are removed.</li>
-    <li>Symbols are represented as strings.
+        <p>Lets have a sneak peek.</p>
 
-    <ul>
-    <li>
-    <code>"foo"</code> parses to <code>"foo"</code>
-    </li>
-    </ul>
-    </li>
-    <li>The symbols <code>#t</code> and <code>#f</code> are represented by Python's <code>True</code> and <code>False</code>, respectively.
+        <div class="highlight highlight-python"><pre><span class="pl-k">&gt;&gt;&gt;</span> <span class="pl-k">from</span> diylisp.parser <span class="pl-k">import</span> parse
+        <span class="pl-k">&gt;&gt;&gt;</span> program <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"""</span></span>
+        <span class="pl-s1">...   (define fact </span>
+        <span class="pl-s1">...       ;; Factorial function</span>
+        <span class="pl-s1">...       (lambda (n) </span>
+        <span class="pl-s1">...           (if (eq n 0) </span>
+        <span class="pl-s1">...               1 ; Factorial of 0 is 1, and we deny </span>
+        <span class="pl-s1">...                 ; the existence of negative numbers</span>
+        <span class="pl-s1">...               (* n (fact (- n 1))))))</span>
+        <span class="pl-s1">... <span class="pl-pds">"""</span></span>
+        <span class="pl-k">&gt;&gt;&gt;</span> parse(program)
+        [<span class="pl-s1"><span class="pl-pds">'</span>define<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>fact<span class="pl-pds">'</span></span>, [<span class="pl-s1"><span class="pl-pds">'</span>lambda<span class="pl-pds">'</span></span>, [<span class="pl-s1"><span class="pl-pds">'</span>n<span class="pl-pds">'</span></span>], [<span class="pl-s1"><span class="pl-pds">'</span>if<span class="pl-pds">'</span></span>, [<span class="pl-s1"><span class="pl-pds">'</span>eq<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>n<span class="pl-pds">'</span></span>, <span class="pl-c1">0</span>], <span class="pl-c1">1</span>, [<span class="pl-s1"><span class="pl-pds">'</span>*<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>n<span class="pl-pds">'</span></span>, [<span class="pl-s1"><span class="pl-pds">'</span>fact<span class="pl-pds">'</span></span>, [<span class="pl-s1"><span class="pl-pds">'</span>-<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>n<span class="pl-pds">'</span></span>, <span class="pl-c1">1</span>]]]]]]</pre></div>    
 
-    <ul>
-    <li>
-    <code>"#t"</code> parses to <code>True</code>
-    </li>
-    </ul>
-    </li>
-    <li>Integers are represented as Python integers.
+        <p>The AST, then, is created as follows:</p>
 
-    <ul>
-    <li>
-    <code>"42"</code> parses to <code>42</code>
-    </li>
-    </ul>
-    </li>
-    <li>The Lisp list expressions are represented as Python lists.
-    <code>"(foo #f 100)"</code> parses to <code>["foo", False, 100]</code>
-    </li>
-    <li>Nested expressions are parsed accordingly.
+        <ul>
+        <li>Comments are removed.</li>
+        <li>Symbols are represented as strings.
 
-    <ul>
-    <li>
-    <code>"((+ (- 1 2) (* (- 4 1) 42)))"</code> parses to <code>[['+', ['-', 1, 2], ['*', ['-', 4, 1], 42]]]</code>
-    </li>
-    </ul>
-    </li>
-    </ul>
+        <ul>
+        <li>
+        <code>"foo"</code> parses to <code>"foo"</code>
+        </li>
+        </ul>
+        </li>
+        <li>The symbols <code>#t</code> and <code>#f</code> are represented by Python's <code>True</code> and <code>False</code>, respectively.
+
+        <ul>
+        <li>
+        <code>"#t"</code> parses to <code>True</code>
+        </li>
+        </ul>
+        </li>
+        <li>Integers are represented as Python integers.
+
+        <ul>
+        <li>
+        <code>"42"</code> parses to <code>42</code>
+        </li>
+        </ul>
+        </li>
+        <li>The Lisp list expressions are represented as Python lists.
+        <code>"(foo #f 100)"</code> parses to <code>["foo", False, 100]</code>
+        </li>
+        <li>Nested expressions are parsed accordingly.
+
+        <ul>
+        <li>
+        <code>"((+ (- 1 2) (* (- 4 1) 42)))"</code> parses to <code>[['+', ['-', 1, 2], ['*', ['-', 4, 1], 42]]]</code>
+        </li>
+        </ul>
+        </li>
+        </ul>
+
+    </div>
 
     <h3>
     <a id="user-content-your-turn" class="anchor" href="#your-turn" aria-hidden="true"><span class="octicon octicon-link"></span></a>Your turn</h3>
 
-    <p>The parsing is done in <code>parser.py</code>. It is your job to implement the <code>parse</code> function here. A lot of the gritty work of counting parentheses and such has been done for you, but you must stitch everything together.</p>
+    <p>It is your job to implement the <code>parse</code> function here. A lot of the gritty work of counting parentheses and such has been done for you, but you must stitch everything together.</p>
 
-    <ul>
-    <li>Have a look at the provided functions in <code>diylisp/parser.py</code> before you start. These should prove useful. </li>
-    <li>
-    <p>The following command runs the tests, stopping at the first one failed.</p>
+    <div class="python-specific">
+        <ul>
+            <li>Have a look at the functions already provided in <code>diylisp/parser.py</code> before you start. These should prove useful. </li>
+        <li><p>The following command runs the tests, stopping at the first one failed.</p>
 
-    <div class="highlight highlight-bash"><pre>nosetests tests/test_1_parsing.py --stop</pre></div>
-    </li>
-    <li>Run the tests and hack away until the tests are passing. Each test has a description, and you should probably read it if you get stuck.</li>
-    </ul>
+            <div class="highlight highlight-bash"><pre>nosetests tests/test_1_parsing.py --stop</pre></div>
+        </li>
+        </ul>
+    </div>
+
+    
+
+    <p>Run the tests and hack away until the tests are passing. Each test has a description, and you should probably read it if you get stuck.</p>
 
     <h3>
     <a id="user-content-whats-next" class="anchor" href="#whats-next" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's next?</h3>

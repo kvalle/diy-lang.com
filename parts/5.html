@@ -14,7 +14,7 @@
 
     <p>This part is the one you might have been waiting for. It's time to add functions to our little language.</p>
 
-    <p>Functions are created with the <code>lambda</code> form, which returns an instance of <code>Closure</code> (find the class definition in <code>diylisp/types.py</code>). The first few tests guide you to implement the <code>lambda</code> form correctly. </p>
+    <p>Functions are created with the <code>lambda</code> form, which returns an <code>closure</code>. The first few tests guide you to implement the <code>lambda</code> form correctly. </p>
 
     <p>The next tests concern calling functions. A function call happens when we evaluate a list in which the first element is a function closure.</p>
 
@@ -25,7 +25,11 @@
 
     <p>This is probably the most difficult part of making the language, so don't worry if it takes a bit longer than the previous parts.</p>
 
-    <div class="highlight highlight-bash"><pre>nosetests tests/test_5_adding_functions_to_the_mix.py --stop</pre></div>
+    <div class="python-specific">
+        <p>In our implementation we will represent closures as instances of the <code>Closure</code> class. Start working with the class definition in <code>diylisp/types.py</code>.</p>
+
+        <div class="highlight highlight-bash"><pre>nosetests tests/test_5_adding_functions_to_the_mix.py --stop</pre></div>
+    </div>
 
     <h3>
     <a id="user-content-whats-next" class="anchor" href="#whats-next" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's next?</h3>
