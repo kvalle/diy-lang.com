@@ -35,7 +35,7 @@ li p { line-height: 1.25em; }
 .small { font-size: 0.7em; }
 .very-small { font-size: 0.4em; }
 a, a > code {
-  color: rgb(249, 38, 114);
+  color: #ff91e9;
   text-decoration: none;
 }
 code {
