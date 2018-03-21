@@ -35,7 +35,8 @@ li p { line-height: 1.25em; }
 .small { font-size: 0.7em; }
 .very-small { font-size: 0.4em; }
 a, a > code {
-  color: #ff91e9;
+  color: rgb(249, 38, 114);
+  /* color: #ff91e9; */
   text-decoration: none;
 }
 code {
@@ -68,8 +69,8 @@ code {
 }
 .inverse {
   background: #272822;
-  color: #777872;
-
+  color: #93948c;
+  /* color: #777872; */
 }
 .inverse h1, .inverse h2 {
   color: #f3f3f3;
