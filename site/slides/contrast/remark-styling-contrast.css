@@ -34,7 +34,8 @@ li p { line-height: 1.25em; }
 .large { font-size: 1.7em; }
 .very-large { font-size: 3em; }
 a, a > code {
-  color: black;
+  color: #0047c4;
+  font-weight: bold;
   text-decoration: none;
 }
 code {
@@ -84,10 +85,10 @@ code .number {
 }
 .inverse {
   background: white;
-  color: black;
+  color: #333;
 }
 .inverse h1, .inverse h2 {
-  color: black;
+  color: #333;
   line-height: 0.8em;
 }
 
@@ -185,7 +186,7 @@ img {
 }
 
 .gray {
-  color: black;
+  color: #555;
 }
 
 .no-bullets ul {
